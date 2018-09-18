@@ -1,0 +1,67 @@
+DO NOT TRANSLATE OR LOCALIZE.
+# Notices for Dependency Injection Third party Porting kit
+This content is produced and maintained by the Java EE CTS project
+ 
+## Trademarks
+Java EE CTS is a trademark of the Oracle Corporation.
+ 
+## Copyright
+All content is the property of the respective authors or their employers. For
+more information regarding authorship of content, please consult the listed
+source code repository logs.
+ 
+## Declared Project Licenses
+This program and the accompanying materials are made available under the terms
+of the Eclipse Public License v. 2.0 which is available at
+http://www.eclipse.org/legal/epl-2.0. This Source Code may also be made
+available under the following Secondary Licenses when the conditions for such
+availability set forth in the Eclipse Public License v. 2.0 are satisfied: GNU
+General Public License, version 2 with the GNU Classpath Exception which is
+available at https://www.gnu.org/software/classpath/license.html.
+ 
+SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ 
+## Source Code
+The project maintains the following source code repositories:
+ 
+ 
+## Third-party Content
+ 
+validation-api (2.0.1)
+  * License: Apache License, 2.0
+hibernate-validator (6.0.5)
+  * License: Apache License, 2.0
+hibernate-jpa-2.0-api (1.0.1)
+  * License: EDL 1.0 EPL 1.0
+jboss-logging (3.3.2)
+  * License: Apache License, 2.0
+jboss-logmanager (2.1.0)
+  * License: LGPL 2.1
+org.jboss.spec:jboss-javaee-7.0: pom (1.1.1)
+  * License: LGPL 2.1
+beanvalidation-tck-tests: (2.0.2)
+  * License: Apache License, 2.0
+beanvalidation-standalone-container: (2.0.2)
+  * License: Apache License, 2.0
+arquillian-glassfish-managed-3.1: (1.0.2)
+  * License: Apache License, 2.0
+arquillian-testng-container: (1.1.11)
+  * License: Apache License, 2.0
+arquillian-protocol-servlet: (1.1.11)
+  * License: Apache License, 2.0
+junit: (4.11)
+  * License: CPAL 1.0 CPL 1.0
+testng: (6.8.8)
+  * License: Apache License, 2.0
+org.hibernate:hibernate-validator-tck-runner: (6.0.5)
+  * License: Apache License, 2.0
+  
+  
+## Cryptography
+ 
+Content may contain encryption software. The country in which you are currently
+may have restrictions on the import, possession, and use, and/or re-export to
+another country, of encryption software. BEFORE using any encryption software,
+please check the country's laws, regulations and policies concerning the import,
+possession, or use, and re-export of encryption software, to see if this is
+permitted.
