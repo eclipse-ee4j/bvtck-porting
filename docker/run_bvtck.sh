@@ -22,9 +22,6 @@ export TS_HOME=${WORKSPACE}/bv-tck-glassfish-porting
 
 #Install Glassfish
 echo "Download and install GlassFish 5.0.1 ..."
-if [ -z "${GF_BUNDLE_URL}" ]; then
-  export GF_BUNDLE_URL="http://download.oracle.com/glassfish/5.0.1/nightly/latest-glassfish.zip"
-fi
 wget --progress=bar:force --no-cache $GF_BUNDLE_URL -O latest-glassfish.zip
 unzip -o ${WORKSPACE}/latest-glassfish.zip -d ${WORKSPACE}
 
