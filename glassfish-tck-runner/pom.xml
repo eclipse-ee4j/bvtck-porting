@@ -125,7 +125,7 @@
        <dependency>
             <groupId>org.jboss.logmanager</groupId>
             <artifactId>jboss-logmanager</artifactId>
-            <version>2.1.0.Final</version>
+            <version>2.1.5.Final</version>
         </dependency>
         <dependency>
             <groupId>org.apache-extras.beanshell</groupId>
@@ -243,14 +243,6 @@
                     <artifactId>arquillian-glassfish-managed-3.1</artifactId>
                     <version>1.0.2</version>
                     <scope>test</scope>
-                </dependency>
- 
-                <dependency>
-                    <groupId>org.jboss.spec</groupId>
-                    <artifactId>jboss-javaee-7.0</artifactId>
-                    <version>1.1.1.Final</version>
-                    <type>pom</type>
-                    <scope>provided</scope>
                 </dependency>
             </dependencies>
  

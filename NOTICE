@@ -35,10 +35,8 @@ hibernate-jpa-2.0-api (1.0.1)
   * License: EDL 1.0 EPL 1.0
 jboss-logging (3.3.2)
   * License: Apache License, 2.0
-jboss-logmanager (2.1.0)
-  * License: LGPL 2.1
-org.jboss.spec:jboss-javaee-7.0: pom (1.1.1)
-  * License: LGPL 2.1
+jboss-logmanager (2.1.5)
+  * License: Apache License, 2.0
 beanvalidation-tck-tests: (2.0.2)
   * License: Apache License, 2.0
 beanvalidation-standalone-container: (2.0.2)
