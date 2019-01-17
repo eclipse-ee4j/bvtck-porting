@@ -81,7 +81,7 @@ spec:
             bash -x ${WORKSPACE}/docker/run_bvtck.sh
           """
           archiveArtifacts artifacts: "bvtck-results.tar.gz"
-          junit testResults: 'bvtck-report/beanvalidation-2.0/*.xml', allowEmptyResults: true
+          junit testResults: 'bvtck-report/**/*.xml', allowEmptyResults: true
         }
       }
     }
