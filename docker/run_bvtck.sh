@@ -67,8 +67,12 @@ sed -i 's/name=\"TestSuite\"/name="beanvalidation-2.0"/g' ${REPORT}/beanvalidati
 
 # Create Junit formated file for sigtests
 echo '<?xml version="1.0" encoding="UTF-8" ?>' > $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
-echo '<testsuite tests="TOTAL" failures="FAILED" name="beanvalidation-2.0.0-sig" time="0" errors="0" skipped="0">' >> $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
-echo '<testcase classname="BVSigTest" name="beanvalidation" time="0"/>' >> $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
+echo '<testsuite tests="TOTAL" failures="FAILED" name="beanvalidation-2.0.0-sig" time="0.2" errors="0" skipped="0">' >> $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
+echo '<testcase classname="BVSigTest" name="beanvalidation" time="0.2">' >> $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
+echo '  <system-out>' >> $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
+cat $REPORT/bv_sig_test_results.txt >> $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
+echo '  </system-out>' >> $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
+echo '</testcase>' >> $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
 echo '</testsuite>' >> $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
 
 # Fill appropriate test counts
