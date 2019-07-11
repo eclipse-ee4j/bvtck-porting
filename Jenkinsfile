@@ -80,8 +80,8 @@ spec:
             env
             bash -x ${WORKSPACE}/docker/run_bvtck.sh
           """
-          archiveArtifacts artifacts: "bvtck-results.tar.gz"
-          junit testResults: 'bvtck-report/beanvalidation-2.0/*.xml', allowEmptyResults: true
+          archiveArtifacts artifacts: "bvtck-results.tar.gz,bvtck-report/**/*.xml,bvtck-report/**/*.html"
+          junit testResults: 'bvtck-report/**/*.xml', allowEmptyResults: true
         }
       }
     }

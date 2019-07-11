@@ -67,18 +67,22 @@ sed -i 's/name=\"TestSuite\"/name="beanvalidation-2.0"/g' ${REPORT}/beanvalidati
 
 # Create Junit formated file for sigtests
 echo '<?xml version="1.0" encoding="UTF-8" ?>' > $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
-echo '<testsuite tests="TOTAL" failures="FAILED" name="beanvalidation-2.0.0-sig" time="0" errors="0" skipped="0">' >> $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
-echo '<testcase classname="BVSigTest" name="beanvalidation" time="0"/>' >> $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
+echo '<testsuite tests="TOTAL" failures="FAILED" name="beanvalidation-2.0.0-sig" time="0.2" errors="0" skipped="0">' >> $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
+echo '<testcase classname="BVSigTest" name="beanvalidation" time="0.2">' >> $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
+echo '  <system-out>' >> $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
+cat $REPORT/bv_sig_test_results.txt >> $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
+echo '  </system-out>' >> $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
+echo '</testcase>' >> $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
 echo '</testsuite>' >> $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
 
 # Fill appropriate test counts
 if [ -f "$REPORT/beanvalidation-$VER-sig/report.html" ]; then
   if grep -q STATUS:Passed "$REPORT/beanvalidation-$VER-sig/report.html"; then
     sed -i 's/tests=\"TOTAL\"/tests="1"/g' $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
-    sed -i 's/failures=\"FAILED\"/tests="0"/g' $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
+    sed -i 's/failures=\"FAILED\"/failures="0"/g' $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
   else
     sed -i 's/tests=\"TOTAL\"/tests="1"/g' $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
-    sed -i 's/failures=\"FAILED\"/tests="1"/g' $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
+    sed -i 's/failures=\"FAILED\"/failures="1"/g' $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
   fi
 fi
 
