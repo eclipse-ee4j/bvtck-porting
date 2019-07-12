@@ -16,7 +16,12 @@
 
 
 VER="2.0"
-unzip -o ${WORKSPACE}/bundles/bv-tck-glassfish-porting-2.0_latest.zip -d ${WORKSPACE}
+if ls ${WORKSPACE}/bundles/*bv-tck*.zip 1> /dev/null 2>&1; then
+  unzip ${WORKSPACE}/bundles/*bv-tck*.zip -d ${WORKSPACE}
+else
+  echo "[ERROR] TCK bundle not found"
+  exit 1
+fi
 
 export TS_HOME=${WORKSPACE}/bv-tck-glassfish-porting
 

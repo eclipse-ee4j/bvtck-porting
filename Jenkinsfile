@@ -53,6 +53,12 @@ spec:
     string(name: 'GF_BUNDLE_URL', 
            defaultValue: 'https://download.eclipse.org/ee4j/jakartaee-tck/8.0.1/nightly/glassfish.zip',
            description: 'URL required for downloading GlassFish Full/Web profile bundle' )
+	string(name: 'TCK_BUNDLE_BASE_URL',
+           defaultValue: '',
+           description: 'Base URL required for downloading prebuilt binary TCK Bundle from a hosted location' )
+    string(name: 'TCK_BUNDLE_FILE_NAME', 
+           defaultValue: 'bv-tck-glassfish-porting-2.0_latest.zip', 
+	   description: 'Name of bundle file to be appended to the base url' )
   }
   environment {
     ANT_HOME = "/usr/share/ant"
