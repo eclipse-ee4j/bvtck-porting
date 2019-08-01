@@ -58,7 +58,7 @@ spec:
            description: 'Base URL required for downloading prebuilt binary TCK Bundle from a hosted location' )
     string(name: 'TCK_BUNDLE_FILE_NAME', 
            defaultValue: 'bv-tck-glassfish-porting-2.0.0.zip', 
-	   description: 'Name of bundle file to be appended to the base url' )
+	         description: 'Name of bundle file to be appended to the base url' )
   }
   environment {
     ANT_HOME = "/usr/share/ant"

@@ -17,7 +17,7 @@
 
 VER="2.0"
 if ls ${WORKSPACE}/bundles/*bv-tck*.zip 1> /dev/null 2>&1; then
-  unzip ${WORKSPACE}/bundles/*bv-tck*.zip -d ${WORKSPACE}
+  unzip -o ${WORKSPACE}/bundles/*bv-tck*.zip -d ${WORKSPACE}
 else
   echo "[ERROR] TCK bundle not found"
   exit 1
