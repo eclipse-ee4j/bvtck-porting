@@ -30,6 +30,20 @@ echo "Download and install GlassFish 5.0.1 ..."
 wget --progress=bar:force --no-cache $GF_BUNDLE_URL -O latest-glassfish.zip
 unzip -o ${WORKSPACE}/latest-glassfish.zip -d ${WORKSPACE}
 
+
+if [ -z "${BV_TCK_VERSION}" ]; then
+  BV_TCK_VERSION=2.0.5	
+fi
+
+if [ -z "${BV_TCK_BUNDLE_URL}" ]; then
+  BV_TCK_BUNDLE_URL=http://download.eclipse.org/ee4j/bean-validation/beanvalidation-tck-dist-${BV_TCK_VERSION}.zip	
+fi
+
+#Install BV TCK dist
+echo "Download and unzip BV TCK dist ..."
+wget --progress=bar:force --no-cache $BV_TCK_BUNDLE_URL -O latest-beanvalidation-tck-dist.zip
+unzip -o ${WORKSPACE}/latest-beanvalidation-tck-dist.zip -d ${WORKSPACE}/
+
 which ant
 ant -version
 
@@ -49,12 +63,37 @@ sed -i "s#admin.user=.*#admin.user=admin#g" ${TS_HOME}/build.properties
 
 #Run Tests
 cd ${TS_HOME}
-ant -Duser.home=$HOME sigtest
-ant -Duser.home=$HOME test
+ant sigtest
+ant test
+
+which mvn
+mvn -version
+
+GROUP_ID=org.hibernate.beanvalidation.tck
+ARTIFACT_ID=beanvalidation-tck-tests 
+BEANVALIDATION_TCK_DIST=beanvalidation-tck-dist
+
+cp ${WORKSPACE}/${BEANVALIDATION_TCK_DIST}-${BV_TCK_VERSION}/artifacts/tck-tests.xml \
+	${WORKSPACE}/${BEANVALIDATION_TCK_DIST}-${BV_TCK_VERSION}/artifacts/beanvalidation-tck-tests-${BV_TCK_VERSION}-tck-tests.xml
+
+mvn install:install-file \
+-Dfile=${WORKSPACE}/${BEANVALIDATION_TCK_DIST}-${BV_TCK_VERSION}/artifacts/beanvalidation-tck-tests-${BV_TCK_VERSION}.jar \
+-DgroupId=${GROUP_ID} \
+-DartifactId=${ARTIFACT_ID} \
+-Dversion=${BV_TCK_VERSION} \
+-Dpackaging=jar
+
+mvn install:install-file \
+-Dfile=${WORKSPACE}/${BEANVALIDATION_TCK_DIST}-${BV_TCK_VERSION}/artifacts/beanvalidation-tck-tests-${BV_TCK_VERSION}-tck-tests.xml \
+-DgroupId=${GROUP_ID} \
+-DartifactId=${ARTIFACT_ID} \
+-Dversion=${BV_TCK_VERSION} \
+-Dpackaging=xml
+
 
 #List dependencies used for testing
 cd ${TS_HOME}/glassfish-tck-runner
-mvn dependency:tree
+mvn test dependency:tree 
 #Generate Reports
 echo "<pre>" > ${REPORT}/beanvalidation-$VER-sig/report.html
 cat $REPORT/bv_sig_test_results.txt >> $REPORT/beanvalidation-$VER-sig/report.html
