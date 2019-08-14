@@ -21,37 +21,111 @@
     <parent>
         <artifactId>hibernate-validator-parent</artifactId>
         <groupId>org.hibernate.validator</groupId>
-        <version>6.0.10.Final</version>
+        <version>6.0.17.Final</version>
     </parent>
- 
     <groupId>org.glassfish</groupId>
-    <version>6.0.10.Final</version>    
+    <version>6.0.17.Final</version>
     <artifactId>hibernate-validator-tck-runner</artifactId>
  
     <name>Hibernate Validator TCK Runner</name>
     <description>Aggregates dependencies and runs the BV TCK</description>
  
     <properties>
-        <tck.version>2.0.3.Final</tck.version>
-        <tck.suite.file>${project.build.directory}/dependency/beanvalidation-tck-tests-suite.xml</tck.suite.file>
+        <tck.version>2.0.5</tck.version>
+        <tck.suite.file>${project.build.directory}/dependency/beanvalidation-tck-tests.xml</tck.suite.file>
         <arquillian.version>1.1.11.Final</arquillian.version>
         <jbossas.version>7.2.0.Final</jbossas.version>
         <jbossTargetDir>${project.build.directory}/jboss-as-${jbossas.version}</jbossTargetDir>
         <validation.provider>org.hibernate.validator.HibernateValidator</validation.provider>
         <remote.debug/>
+
+        <validation.api.version>2.0.2</validation.api.version>
+        <testng.version>6.9.9</testng.version>
+        <assertj-core.version>3.7.0</assertj-core.version>
+        <shrinkwrap.descriptors.version>2.0.0-alpha-10</shrinkwrap.descriptors.version>
+
+        <cdi-api.version>2.0.1</cdi-api.version>
+        <jakarta.el.version>3.0.2</jakarta.el.version>
+        <jboss.test.audit.version>1.1.3.Final</jboss.test.audit.version>
+   
     </properties>
  
     <dependencies>
         <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>2.0.1.Final</version>
-            <scope>test</scope>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>${validation.api.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>6.0.10.Final</version>
+            <version>6.0.17.Final</version>
+             <exclusions>
+                <exclusion>
+                    <groupId>javax.validation</groupId>
+                    <artifactId>validation-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.test-audit</groupId>
+            <artifactId>jboss-test-audit-api</artifactId>
+            <version>${jboss.test.audit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.test-audit</groupId>
+            <artifactId>jboss-test-audit-impl</artifactId>
+            <version>${jboss.test.audit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.shrinkwrap.descriptors</groupId>
+            <artifactId>shrinkwrap-descriptors-impl-javaee</artifactId>
+            <version>${shrinkwrap.descriptors.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.enterprise</groupId>
+            <artifactId>jakarta.enterprise.cdi-api</artifactId>
+            <version>${cdi-api.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>jakarta.el</groupId>
+                    <artifactId>jakarta.el-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>jakarta.interceptor</groupId>
+                    <artifactId>jakarta.interceptor-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.interceptor</groupId>
+            <artifactId>jakarta.interceptor-api</artifactId>
+            <version>1.2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.ejb</groupId>
+            <artifactId>jakarta.ejb-api</artifactId>
+            <version>3.2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+            <version>1.3.4</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.el</groupId>
+            <artifactId>jakarta.el-api</artifactId>
+            <version>${jakarta.el.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
@@ -60,20 +134,10 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>6.8.8</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.beanshell</groupId>
-                    <artifactId>bsh</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
             <groupId>org.hibernate.beanvalidation.tck</groupId>
             <artifactId>beanvalidation-tck-tests</artifactId>
-            <version>${tck.version}</version>
+            <version>2.0.5</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jboss.arquillian.testng</groupId>
@@ -170,7 +234,6 @@
                                     <groupId>org.hibernate.beanvalidation.tck</groupId>
                                     <artifactId>beanvalidation-tck-tests</artifactId>
                                     <type>xml</type>
-                                    <classifier>suite</classifier>
                                     <overWrite>false</overWrite>
                                 </artifactItem>
                             </artifactItems>

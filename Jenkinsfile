@@ -51,19 +51,26 @@ spec:
   }
   parameters {
     string(name: 'GF_BUNDLE_URL', 
-           defaultValue: 'https://download.eclipse.org/ee4j/jakartaee-tck/8.0.1/nightly/glassfish.zip',
-           description: 'URL required for downloading GlassFish Full/Web profile bundle' )
-	string(name: 'TCK_BUNDLE_BASE_URL',
-           defaultValue: '',
-           description: 'Base URL required for downloading prebuilt binary TCK Bundle from a hosted location' )
+             defaultValue: 'https://download.eclipse.org/ee4j/jakartaee-tck/8.0.1/nightly/glassfish.zip',
+             description: 'URL required for downloading GlassFish Full/Web profile bundle' )
+  	string(name: 'TCK_BUNDLE_BASE_URL',
+              defaultValue: '',
+              description: 'Base URL required for downloading prebuilt binary TCK Bundle from a hosted location' )
     string(name: 'TCK_BUNDLE_FILE_NAME', 
-           defaultValue: 'bv-tck-glassfish-porting-2.0.0.zip', 
-	         description: 'Name of bundle file to be appended to the base url' )
+             defaultValue: 'bv-tck-glassfish-porting-2.0.0.zip', 
+             description: 'Name of bundle file to be appended to the base url' )
+    string(name: 'BV_TCK_BUNDLE_URL', 
+             defaultValue: 'http://download.eclipse.org/ee4j/bean-validation/beanvalidation-tck-dist-2.0.5.zip', 
+  	         description: 'BV TCK bundle url' )
+    string(name: 'BV_TCK_VERSION', 
+             defaultValue: '2.0.5', 
+             description: 'version of bundle file' )
+
   }
   environment {
     ANT_HOME = "/usr/share/ant"
     MAVEN_HOME = "/usr/share/maven"
-    ANT_OPTS = "-Djavax.xml.accessExternalStylesheet=all -Djavax.xml.accessExternalSchema=all -Djavax.xml.accessExternalDTD=file,http" 
+    ANT_OPTS = "-Djavax.xml.accessExternalStylesheet=all -Djavax.xml.accessExternalSchema=all -Djavax.xml.accessExternalDTD=file,http -Duser.home=$HOME" 
     MAVEN_OPTS="-Duser.home=$HOME"
   }
   stages {
