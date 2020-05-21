@@ -1,6 +1,6 @@
 #!/bin/bash -xe
 #
-# Copyright (c) 2018 Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2018, 2020 Oracle and/or its affiliates. All rights reserved.
 #
 # This program and the accompanying materials are made available under the
 # terms of the Eclipse Public License v. 2.0, which is available at
@@ -15,7 +15,7 @@
 # SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
 
 
-VER="2.0"
+VER="3.0"
 if ls ${WORKSPACE}/bundles/*bv-tck*.zip 1> /dev/null 2>&1; then
   unzip -o ${WORKSPACE}/bundles/*bv-tck*.zip -d ${WORKSPACE}
 else
@@ -25,23 +25,42 @@ fi
 
 export TS_HOME=${WORKSPACE}/bv-tck-glassfish-porting
 
+GLASSFISH_TOP_DIR=glassfish6
+
 #Install Glassfish
-echo "Download and install GlassFish 5.0.1 ..."
-wget --progress=bar:force --no-cache $GF_BUNDLE_URL -O latest-glassfish.zip
+echo "Download and install GlassFish ..."
+wget --progress=bar:force --no-cache $GF_BUNDLE_URL -O ${WORKSPACE}/latest-glassfish.zip
 unzip -o ${WORKSPACE}/latest-glassfish.zip -d ${WORKSPACE}
 
 
+rm -fr arquillian-core-jakartaee9 
+wget https://github.com/jakartaredhat/arquillian-core/archive/jakartaee9.zip -O arquillian-core.zip
+unzip -q arquillian-core.zip
+cd arquillian-core-jakartaee9
+mvn --global-settings "${TS_HOME}/settings.xml" install
+cd $WORKSPACE
+
+# Build 1.0.0-SNAPSHOT release of arquillian-container-glassfish6
+rm -fr arquillian-container-glassfish6-master 
+wget https://github.com/arquillian/arquillian-container-glassfish6/archive/master.zip -O arquillian-container-glassfish6.zip
+unzip -q arquillian-container-glassfish6.zip
+cd arquillian-container-glassfish6-master
+mvn --global-settings "${TS_HOME}/settings.xml" install
+cd $WORKSPACE
+
+
 if [ -z "${BV_TCK_VERSION}" ]; then
-  BV_TCK_VERSION=2.0.5	
+  BV_TCK_VERSION=3.0.0-M5
 fi
 
 if [ -z "${BV_TCK_BUNDLE_URL}" ]; then
   BV_TCK_BUNDLE_URL=http://download.eclipse.org/ee4j/bean-validation/beanvalidation-tck-dist-${BV_TCK_VERSION}.zip	
 fi
 
+
 #Install BV TCK dist
-echo "Download and unzip BV TCK dist ..."
-wget --progress=bar:force --no-cache $BV_TCK_BUNDLE_URL -O latest-beanvalidation-tck-dist.zip
+#echo "Download and unzip BV TCK dist ..."
+wget --progress=bar:force --no-cache $BV_TCK_BUNDLE_URL -O ${WORKSPACE}/latest-beanvalidation-tck-dist.zip
 unzip -o ${WORKSPACE}/latest-beanvalidation-tck-dist.zip -d ${WORKSPACE}/
 
 which ant
@@ -53,13 +72,39 @@ mkdir -p ${REPORT}/beanvalidation-$VER-sig
 mkdir -p ${REPORT}/beanvalidation-$VER
 
 #Edit Glassfish Security policy
-cat ${WORKSPACE}/docker/BV.policy >> ${WORKSPACE}/glassfish5/glassfish/domains/domain1/config/server.policy
+cat ${WORKSPACE}/docker/BV.policy >> ${WORKSPACE}/${GLASSFISH_TOP_DIR}/glassfish/domains/domain1/config/server.policy
 
 #Edit test properties
 sed -i "s#porting.home=.*#porting.home=${TS_HOME}#g" ${TS_HOME}/build.properties
-sed -i "s#glassfish.home=.*#glassfish.home=${WORKSPACE}/glassfish5/glassfish#g" ${TS_HOME}/build.properties
+sed -i "s#glassfish.home=.*#glassfish.home=${WORKSPACE}/${GLASSFISH_TOP_DIR}/glassfish#g" ${TS_HOME}/build.properties
 sed -i "s#report.dir=.*#report.dir=${REPORT}#g" ${TS_HOME}/build.properties
 sed -i "s#admin.user=.*#admin.user=admin#g" ${TS_HOME}/build.properties
+
+GROUP_ID=jakarta.validation
+ARTIFACT_ID=beanvalidation-tck-tests 
+BEANVALIDATION_TCK_DIST=beanvalidation-tck-dist
+
+# Parent pom
+mvn --global-settings "${TS_HOME}/settings.xml" org.apache.maven.plugins:maven-install-plugin:3.0.0-M1:install-file \
+-Dfile=${WORKSPACE}/${BEANVALIDATION_TCK_DIST}-${BV_TCK_VERSION}/src/pom.xml \
+-DgroupId=${GROUP_ID} \
+-DartifactId=beanvalidation-tck-parent \
+-Dversion=${BV_TCK_VERSION} \
+-Dpackaging=pom
+
+mvn --global-settings "${TS_HOME}/settings.xml" org.apache.maven.plugins:maven-install-plugin:3.0.0-M1:install-file \
+-Dfile=${WORKSPACE}/${BEANVALIDATION_TCK_DIST}-${BV_TCK_VERSION}/artifacts/beanvalidation-tck-tests-${BV_TCK_VERSION}.jar \
+-DgroupId=${GROUP_ID} \
+-DartifactId=${ARTIFACT_ID} \
+-Dversion=${BV_TCK_VERSION} \
+-Dpackaging=jar
+
+mvn --global-settings "${TS_HOME}/settings.xml" org.apache.maven.plugins:maven-install-plugin:3.0.0-M1:install-file \
+-Dfile=${WORKSPACE}/${BEANVALIDATION_TCK_DIST}-${BV_TCK_VERSION}/artifacts/tck-tests.xml \
+-DgroupId=${GROUP_ID} \
+-DartifactId=${ARTIFACT_ID} \
+-Dversion=${BV_TCK_VERSION} \
+-Dpackaging=xml
 
 #Run Tests
 cd ${TS_HOME}
@@ -69,31 +114,11 @@ ant test
 which mvn
 mvn -version
 
-GROUP_ID=org.hibernate.beanvalidation.tck
-ARTIFACT_ID=beanvalidation-tck-tests 
-BEANVALIDATION_TCK_DIST=beanvalidation-tck-dist
-
-cp ${WORKSPACE}/${BEANVALIDATION_TCK_DIST}-${BV_TCK_VERSION}/artifacts/tck-tests.xml \
-	${WORKSPACE}/${BEANVALIDATION_TCK_DIST}-${BV_TCK_VERSION}/artifacts/beanvalidation-tck-tests-${BV_TCK_VERSION}-tck-tests.xml
-
-mvn install:install-file \
--Dfile=${WORKSPACE}/${BEANVALIDATION_TCK_DIST}-${BV_TCK_VERSION}/artifacts/beanvalidation-tck-tests-${BV_TCK_VERSION}.jar \
--DgroupId=${GROUP_ID} \
--DartifactId=${ARTIFACT_ID} \
--Dversion=${BV_TCK_VERSION} \
--Dpackaging=jar
-
-mvn install:install-file \
--Dfile=${WORKSPACE}/${BEANVALIDATION_TCK_DIST}-${BV_TCK_VERSION}/artifacts/beanvalidation-tck-tests-${BV_TCK_VERSION}-tck-tests.xml \
--DgroupId=${GROUP_ID} \
--DartifactId=${ARTIFACT_ID} \
--Dversion=${BV_TCK_VERSION} \
--Dpackaging=xml
-
 
 #List dependencies used for testing
 cd ${TS_HOME}/glassfish-tck-runner
-mvn test dependency:tree 
+mvn --global-settings "${TS_HOME}/settings.xml" dependency:tree
+
 #Generate Reports
 echo "<pre>" > ${REPORT}/beanvalidation-$VER-sig/report.html
 cat $REPORT/bv_sig_test_results.txt >> $REPORT/beanvalidation-$VER-sig/report.html
@@ -107,7 +132,7 @@ fi
 
 #Copy surefire reports to report directory
 mv ${REPORT}/beanvalidation-$VER/TEST-TestSuite.xml  ${REPORT}/beanvalidation-$VER/beanvalidation-$VER-junit-report.xml
-sed -i 's/name=\"TestSuite\"/name="beanvalidation-2.0"/g' ${REPORT}/beanvalidation-$VER/beanvalidation-$VER-junit-report.xml
+sed -i 's/name=\"TestSuite\"/name="beanvalidation-3.0"/g' ${REPORT}/beanvalidation-$VER/beanvalidation-$VER-junit-report.xml
 
 # Create Junit formated file for sigtests
 echo '<?xml version="1.0" encoding="UTF-8" ?>' > $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
@@ -130,4 +155,4 @@ if [ -f "$REPORT/beanvalidation-$VER-sig/report.html" ]; then
   fi
 fi
 
-tar zcvf ${WORKSPACE}/bvtck-results.tar.gz ${REPORT} ${WORKSPACE}/bv-tck-glassfish-porting/glassfish-tck-runner/target/surefire-reports ${WORKSPACE}/glassfish5/glassfish/domains/domain1/config ${WORKSPACE}/glassfish5/glassfish/domains/domain1/logs
+tar zcvf ${WORKSPACE}/bvtck-results.tar.gz ${REPORT} ${WORKSPACE}/bv-tck-glassfish-porting/glassfish-tck-runner/target/surefire-reports ${WORKSPACE}/${GLASSFISH_TOP_DIR}/glassfish/domains/domain1/config ${WORKSPACE}/${GLASSFISH_TOP_DIR}/glassfish/domains/domain1/logs
