@@ -34,14 +34,14 @@ spec:
     - "localhost.localdomain"
   containers:
   - name: bv-tck-ci
-    image: anajosep/cts-base:0.1
+    image: jakartaee/cts-base:0.2
     command:
     - cat
     tty: true
     imagePullPolicy: Always
     env:
-      - name: JAVA_TOOL_OPTIONS
-        value: -Xmx2G
+    - name: JAVA_TOOL_OPTIONS
+      value: -Xmx2G
     resources:
       limits:
         memory: "8Gi"
@@ -51,19 +51,19 @@ spec:
   }
   parameters {
     string(name: 'GF_BUNDLE_URL', 
-             defaultValue: 'https://download.eclipse.org/ee4j/jakartaee-tck/8.0.1/nightly/glassfish.zip',
+             defaultValue: 'https://ci.eclipse.org/jakartaee-tck/job/build-glassfish/lastSuccessfulBuild/artifact/appserver/distributions/glassfish/target/glassfish.zip',
              description: 'URL required for downloading GlassFish Full/Web profile bundle' )
   	string(name: 'TCK_BUNDLE_BASE_URL',
               defaultValue: '',
               description: 'Base URL required for downloading prebuilt binary TCK Bundle from a hosted location' )
     string(name: 'TCK_BUNDLE_FILE_NAME', 
-             defaultValue: 'bv-tck-glassfish-porting-2.0.0.zip', 
+             defaultValue: 'bv-tck-glassfish-porting-3.0.0.zip', 
              description: 'Name of bundle file to be appended to the base url' )
     string(name: 'BV_TCK_BUNDLE_URL', 
-             defaultValue: 'http://download.eclipse.org/ee4j/bean-validation/beanvalidation-tck-dist-2.0.5.zip', 
+             defaultValue: 'http://download.eclipse.org/ee4j/bean-validation/3.0/beanvalidation-tck-dist-3.0.0-M5.zip', 
   	         description: 'BV TCK bundle url' )
     string(name: 'BV_TCK_VERSION', 
-             defaultValue: '2.0.5', 
+             defaultValue: '3.0.0', 
              description: 'version of bundle file' )
 
   }

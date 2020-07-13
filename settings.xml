@@ -1,6 +1,6 @@
 <!--
 
-    Copyright (c) 2018 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 2018, 2020 Oracle and/or its affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Public License v. 2.0, which is available at
@@ -17,6 +17,7 @@
 -->
 
 <settings>
+    <localRepository>${env.TS_HOME}/.m2</localRepository>
 <activeProfiles>
     <activeProfile>default</activeProfile>
   </activeProfiles>
@@ -25,47 +26,24 @@
 <id>default</id>
 <repositories>
     <repository>
-      <id>jboss-public-repository-group</id>
-      <name>JBoss Public Repository Group</name>
-      <url>http://repository.jboss.org/nexus/content/groups/public/</url>
+      <id>central</id>
+      <name>Central Repository</name>
+      <url>https://repo.maven.apache.org/maven2</url>
       <layout>default</layout>
-      <releases>
-        <enabled>true</enabled>
-        <updatePolicy>never</updatePolicy>
-      </releases>
       <snapshots>
         <enabled>true</enabled>
-        <updatePolicy>never</updatePolicy>
       </snapshots>
     </repository>
-     <repository>
-      <id>oss-public-repository-group</id>
-      <name>OSS Sonatype Public Repository Group</name>
-      <url>https://oss.sonatype.org/content/repositories/staging</url>
+    <repository>
+      <id>jboss</id>
+      <name>Central Repository</name>
+      <url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
       <layout>default</layout>
-      <releases>
-        <enabled>true</enabled>
-        <updatePolicy>always</updatePolicy>
-      </releases>
       <snapshots>
         <enabled>true</enabled>
-        <updatePolicy>always</updatePolicy>
       </snapshots>
     </repository>
-  </repositories>
-  <pluginRepositories>
-    <pluginRepository>
-      <id>jboss-public-repository-group</id>
-      <name>JBoss Public Repository Group</name>
-      <url>http://repository.jboss.org/nexus/content/groups/public/</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </pluginRepository>
-  </pluginRepositories>
+</repositories>
 </profile>
 </profiles>
 </settings>
