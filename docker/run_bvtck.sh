@@ -66,6 +66,14 @@ unzip -o ${WORKSPACE}/latest-beanvalidation-tck-dist.zip -d ${WORKSPACE}/
 which ant
 ant -version
 
+if [[ "$JDK" == "JDK11" || "$JDK" == "jdk11" ]];then
+  export JAVA_HOME=${JDK11_HOME}
+  export PATH=$JAVA_HOME/bin:$PATH
+fi
+
+which java
+java -version
+
 REPORT=${WORKSPACE}/bvtck-report
 
 mkdir -p ${REPORT}/beanvalidation-$VER-sig

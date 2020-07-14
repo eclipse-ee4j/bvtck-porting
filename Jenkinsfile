@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2018, 2020 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -51,21 +51,22 @@ spec:
   }
   parameters {
     string(name: 'GF_BUNDLE_URL', 
-             defaultValue: 'https://ci.eclipse.org/jakartaee-tck/job/build-glassfish/lastSuccessfulBuild/artifact/appserver/distributions/glassfish/target/glassfish.zip',
-             description: 'URL required for downloading GlassFish Full/Web profile bundle' )
-  	string(name: 'TCK_BUNDLE_BASE_URL',
-              defaultValue: '',
-              description: 'Base URL required for downloading prebuilt binary TCK Bundle from a hosted location' )
+           defaultValue: 'https://ci.eclipse.org/jakartaee-tck/job/build-glassfish/lastSuccessfulBuild/artifact/appserver/distributions/glassfish/target/glassfish.zip',
+           description: 'URL required for downloading GlassFish Full/Web profile bundle' )
+    string(name: 'TCK_BUNDLE_BASE_URL',
+           defaultValue: '',
+           description: 'Base URL required for downloading prebuilt binary TCK Bundle from a hosted location' )
     string(name: 'TCK_BUNDLE_FILE_NAME', 
-             defaultValue: 'bv-tck-glassfish-porting-3.0.0.zip', 
-             description: 'Name of bundle file to be appended to the base url' )
+           defaultValue: 'bv-tck-glassfish-porting-3.0.0.zip', 
+           description: 'Name of bundle file to be appended to the base url' )
     string(name: 'BV_TCK_BUNDLE_URL', 
-             defaultValue: 'http://download.eclipse.org/ee4j/bean-validation/3.0/beanvalidation-tck-dist-3.0.0-M5.zip', 
-  	         description: 'BV TCK bundle url' )
+           defaultValue: 'http://download.eclipse.org/ee4j/bean-validation/3.0/beanvalidation-tck-dist-3.0.0-M5.zip', 
+  	   description: 'BV TCK bundle url' )
     string(name: 'BV_TCK_VERSION', 
-             defaultValue: '3.0.0', 
-             description: 'version of bundle file' )
-
+           defaultValue: '3.0.0', 
+           description: 'version of bundle file' )
+    choice(name: 'JDK', choices: 'JDK8\nJDK11',
+           description: 'Java SE Version to be used for running TCK either JDK8/JDK11' )
   }
   environment {
     ANT_HOME = "/usr/share/ant"
