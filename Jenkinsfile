@@ -63,7 +63,7 @@ spec:
            defaultValue: 'http://download.eclipse.org/ee4j/bean-validation/3.0/beanvalidation-tck-dist-3.0.0-M5.zip', 
   	   description: 'BV TCK bundle url' )
     string(name: 'BV_TCK_VERSION', 
-           defaultValue: '3.0.0', 
+           defaultValue: '3.0.0-M5', 
            description: 'version of bundle file' )
     choice(name: 'JDK', choices: 'JDK8\nJDK11',
            description: 'Java SE Version to be used for running TCK either JDK8/JDK11' )
