@@ -24,7 +24,7 @@
     </parent>
 	<groupId>jakarta.validation</groupId>
     <artifactId>tck-runner</artifactId>
-    <version>3.0.0-M5</version>
+    <version>3.0.0</version>
 
     <name>Jakarta Bean Validation TCK Runner</name>
     <description>Aggregates dependencies and runs the Jakarta Bean Validation TCK</description>
@@ -60,7 +60,7 @@
 		<dependency>
     	<groupId>org.hibernate.validator</groupId>
     		<artifactId>hibernate-validator-cdi</artifactId>
-    		<version>7.0.0.Alpha5</version>
+    		<version>7.0.0.Alpha6</version>
   		</dependency>
 		<dependency>
 		    <groupId>jakarta.ws.rs</groupId>
@@ -75,7 +75,7 @@
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>7.0.0.Alpha5</version>
+            <version>7.0.0.Alpha6</version>
              <exclusions>
                 <exclusion>
                     <groupId>jakarta.validation</groupId>
@@ -146,7 +146,7 @@
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>beanvalidation-tck-tests</artifactId>
-            <version>3.0.0-M5</version>
+            <version>3.0.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>

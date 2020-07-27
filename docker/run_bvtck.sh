@@ -50,7 +50,7 @@ cd $WORKSPACE
 
 
 if [ -z "${BV_TCK_VERSION}" ]; then
-  BV_TCK_VERSION=3.0.0-M5
+  BV_TCK_VERSION=3.0.0
 fi
 
 if [ -z "${BV_TCK_BUNDLE_URL}" ]; then
