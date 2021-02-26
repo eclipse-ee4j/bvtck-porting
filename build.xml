@@ -24,7 +24,7 @@
 
 	<property name="maven.executable" value="${env.MAVEN_HOME}/bin/mvn" />
         <property name="pathsep" value="${path.separator}"/>
-        <property name="tck.version" value="3.0.0"/>
+        <property name="tck.version" value="3.1.0"/>
 	<property name="src" value="${basedir}/src" />
 	<property name="classes" value="${basedir}/classes" />
 	<property name="dist" value="${basedir}/dist" />
@@ -39,12 +39,12 @@
         
         <!-- Set the sig file to use based on the Java SE Version in use -->
 	<if>
-                <equals arg1="${java.specification.version}" arg2="1.7"/>
+                <equals arg1="${java.specification.version}" arg2="1.8"/>
                 <then>
-                        <property name="sig.file" value="${porting.home}/validation-api-java7.sig" />
+                        <property name="sig.file" value="${porting.home}/validation-api-java8.sig" />
                 </then>
                 <else>
-                    <property name="sig.file" value="${porting.home}/validation-api-java8.sig" />
+                    <property name="sig.file" value="${porting.home}/validation-api-java11.sig" />
                 </else>
         </if>
         
