@@ -36,12 +36,12 @@
         <jbossTargetDir>${project.build.directory}/jboss-as-${jbossas.version}</jbossTargetDir>
         <validation.provider>org.hibernate.validator.HibernateValidator</validation.provider>
         <remote.debug/>
-        <validation.api.version>3.0.0-M1</validation.api.version>
+        <validation.api.version>3.0.0</validation.api.version>
         <testng.version>6.14.3</testng.version>
         <assertj-core.version>3.7.0</assertj-core.version>
         <shrinkwrap.descriptors.version>2.0.0-alpha-10</shrinkwrap.descriptors.version>
-        <cdi-api.version>3.0.0-M4</cdi-api.version>
-        <jakarta.el.version>4.0.0-RC2</jakarta.el.version>
+        <cdi-api.version>3.0.0</cdi-api.version>
+        <jakarta.el.version>4.0.0</jakarta.el.version>
         <jboss.test.audit.version>1.1.4.Final</jboss.test.audit.version>
         <arquillian.container.glassfish6>1.0.0.Alpha1</arquillian.container.glassfish6>
     </properties>
@@ -55,7 +55,7 @@
 		<dependency>
 		    <groupId>jakarta.platform</groupId>
 		    <artifactId>jakarta.jakartaee-api</artifactId>
-		    <version>9.0.0-RC2</version>
+		    <version>9.1.0</version>
 		</dependency>
 		<dependency>
     	<groupId>org.hibernate.validator</groupId>
@@ -65,7 +65,7 @@
 		<dependency>
 		    <groupId>jakarta.ws.rs</groupId>
 		    <artifactId>jakarta.ws.rs-api</artifactId>
-		    <version>3.0.0-M1</version>
+		    <version>3.0.0</version>
 		</dependency>
         <dependency>
             <groupId>jakarta.validation</groupId>
@@ -75,7 +75,7 @@
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>7.0.0.Alpha6</version>
+            <version>7.0.1.Final</version>
              <exclusions>
                 <exclusion>
                     <groupId>jakarta.validation</groupId>
@@ -126,17 +126,17 @@
         <dependency>
             <groupId>jakarta.interceptor</groupId>
             <artifactId>jakarta.interceptor-api</artifactId>
-            <version>1.2.4</version>
+            <version>2.0.0</version>
         </dependency>
         <dependency>
             <groupId>jakarta.ejb</groupId>
             <artifactId>jakarta.ejb-api</artifactId>
-            <version>3.2.5</version>
+            <version>4.0.0</version>
         </dependency>
         <dependency>
             <groupId>jakarta.annotation</groupId>
             <artifactId>jakarta.annotation-api</artifactId>
-            <version>2.0.0-RC1</version>
+            <version>2.0.0</version>
         </dependency>
         <dependency>
             <groupId>jakarta.el</groupId>
