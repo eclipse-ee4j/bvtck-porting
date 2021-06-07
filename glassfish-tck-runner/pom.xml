@@ -213,6 +213,16 @@
           <type>maven-plugin</type>
         </dependency>
         <dependency>
+	        <groupId>org.glassfish.jersey.inject</groupId>
+	        <artifactId>jersey-hk2</artifactId>
+	        <version>3.0.0</version>
+        </dependency>
+        <dependency>
+	        <groupId>org.glassfish.hk2</groupId>
+	        <artifactId>hk2-locator</artifactId>
+	        <version>3.0.0</version>
+        </dependency>
+        <dependency>
 	        <groupId>org.jboss.arquillian.container</groupId>
 	        <artifactId>arquillian-glassfish-managed-6</artifactId>
 	        <version>${arquillian.container.glassfish6}</version>
