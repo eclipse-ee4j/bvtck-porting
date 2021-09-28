@@ -65,8 +65,8 @@ spec:
     string(name: 'BV_TCK_VERSION', 
            defaultValue: '3.0.0-RC1', 
            description: 'version of bundle file' )
-    choice(name: 'JDK', choices: 'JDK8\nJDK11',
-           description: 'Java SE Version to be used for running TCK either JDK8/JDK11' )
+    choice(name: 'JDK', choices: 'JDK11',
+           description: 'Java SE Version to be used for running TCK either JDK11' )
   }
   environment {
     ANT_HOME = "/usr/share/ant"
