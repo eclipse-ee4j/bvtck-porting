@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2018, 2022 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -34,7 +34,7 @@ spec:
     - "localhost.localdomain"
   containers:
   - name: bv-tck-ci
-    image: jakartaee/cts-base:0.2
+    image: jakartaee/cts-base:0.3
     command:
     - cat
     tty: true
@@ -51,7 +51,7 @@ spec:
   }
   parameters {
     string(name: 'GF_BUNDLE_URL', 
-           defaultValue: 'https://ci.eclipse.org/jakartaee-tck/job/build-glassfish/lastSuccessfulBuild/artifact/appserver/distributions/glassfish/target/glassfish.zip',
+           defaultValue: 'https://download.eclipse.org/ee4j/glassfish/glassfish-7.0.0-SNAPSHOT-nightly.zip',
            description: 'URL required for downloading GlassFish Full/Web profile bundle' )
     string(name: 'TCK_BUNDLE_BASE_URL',
            defaultValue: '',
@@ -60,13 +60,13 @@ spec:
            defaultValue: 'bv-tck-glassfish-porting-3.0.0.zip', 
            description: 'Name of bundle file to be appended to the base url' )
     string(name: 'BV_TCK_BUNDLE_URL', 
-           defaultValue: 'https://download.eclipse.org/ee4j/bean-validation/3.0/beanvalidation-tck-dist-3.0.0-RC1.zip', 
+           defaultValue: 'https://download.eclipse.org/ee4j/bean-validation/3.0/beanvalidation-tck-dist-3.0.0.zip', 
   	   description: 'BV TCK bundle url' )
     string(name: 'BV_TCK_VERSION', 
-           defaultValue: '3.0.0-RC1', 
+           defaultValue: '3.0.0', 
            description: 'version of bundle file' )
-    choice(name: 'JDK', choices: 'JDK11',
-           description: 'Java SE Version to be used for running TCK either JDK11' )
+    choice(name: 'JDK', choices: 'JDK11\nJDK17',
+           description: 'Java SE Version to be used for running TCK either JDK11 or JDK17' )
   }
   environment {
     ANT_HOME = "/usr/share/ant"

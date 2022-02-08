@@ -24,7 +24,7 @@
 
 	<property name="maven.executable" value="${env.MAVEN_HOME}/bin/mvn" />
         <property name="pathsep" value="${path.separator}"/>
-        <property name="portingkit.version" value="3.0.1"/>
+        <property name="portingkit.version" value="3.0.2"/>
 	<property name="src" value="${basedir}/src" />
 	<property name="classes" value="${basedir}/classes" />
 	<property name="dist" value="${basedir}/dist" />
@@ -34,20 +34,11 @@
         <property name="admin.host" value="localhost"/>
         <!-- number of seconds to wait for the v4 admin port to be available -->
 	<property name="wait.for.v4" value="90"/> 
+	<property name="sig.file" value="${porting.home}/validation-api.sig" />
+
         
         <taskdef resource="net/sf/antcontrib/antlib.xml" classpath="${lib}/ant-contrib.jar" />
-        
-        <!-- Set the sig file to use based on the Java SE Version in use -->
-	<if>
-                <equals arg1="${java.specification.version}" arg2="1.7"/>
-                <then>
-                        <property name="sig.file" value="${porting.home}/validation-api-java7.sig" />
-                </then>
-                <else>
-                    <property name="sig.file" value="${porting.home}/validation-api-java8.sig" />
-                </else>
-        </if>
-        
+    
         <condition property="java.classes.for.sig.ext" value="bundle/Classes/classes.jar"
                                    else="lib/rt.jar">    
             <and> 
