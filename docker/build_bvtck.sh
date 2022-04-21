@@ -1,6 +1,6 @@
 #!/bin/bash -xe
 #
-# Copyright (c) 2018, 2021 Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2018, 2022 Oracle and/or its affiliates. All rights reserved.
 #
 # This program and the accompanying materials are made available under the
 # terms of the Eclipse Public License v. 2.0, which is available at
@@ -13,9 +13,6 @@
 # https://www.gnu.org/software/classpath/license.html.
 #
 # SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
-
-export JAVA_HOME=${JDK11_HOME}
-export PATH=$JAVA_HOME/bin:$PATH
 
 
 echo "ANT_HOME=$ANT_HOME"
@@ -36,7 +33,7 @@ mvn -version
 
 
 sed -i "s#^porting\.home=.*#porting.home=$WORKSPACE#g" "$WORKSPACE/build.xml"
-sed -i "s#^glassfish\.home=.*#glassfish.home=$WORKSPACE/glassfish6/glassfish#g" "$WORKSPACE/build.xml"
+sed -i "s#^glassfish\.home=.*#glassfish.home=$WORKSPACE/glassfish7/glassfish#g" "$WORKSPACE/build.xml"
 
 ant -version
 ant dist.sani
