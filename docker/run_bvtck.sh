@@ -33,13 +33,6 @@ wget --progress=bar:force --no-cache $GF_BUNDLE_URL -O ${WORKSPACE}/latest-glass
 unzip -o ${WORKSPACE}/latest-glassfish.zip -d ${WORKSPACE}
 
 
-rm -fr arquillian-core-master 
-wget https://github.com/arquillian/arquillian-core/archive/master.zip -O arquillian-core.zip
-unzip -q -o arquillian-core.zip
-cd arquillian-core-master
-mvn --global-settings "${TS_HOME}/settings.xml" clean install -DskipTests
-cd $WORKSPACE
-
 # Build 1.0.0-SNAPSHOT release of arquillian-container-glassfish7
 rm -fr arquillian-container-glassfish6-master 
 wget https://github.com/arquillian/arquillian-container-glassfish6/archive/master.zip -O arquillian-container-glassfish.zip

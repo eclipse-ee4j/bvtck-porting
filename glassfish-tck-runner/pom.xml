@@ -24,7 +24,7 @@
     </parent>
     <groupId>jakarta.validation</groupId>
     <artifactId>tck-runner</artifactId>
-    <version>3.0.0</version>
+    <version>3.0.1</version>
 
     <name>Jakarta Bean Validation TCK Runner</name>
     <description>Aggregates dependencies and runs the Jakarta Bean Validation TCK</description>
@@ -40,11 +40,10 @@
         <testng.version>6.14.3</testng.version>
         <assertj-core.version>3.7.0</assertj-core.version>
         <shrinkwrap.descriptors.version>2.0.0-alpha-10</shrinkwrap.descriptors.version>
-        <cdi-api.version>4.0.0</cdi-api.version>
+        <cdi-api.version>4.0.1</cdi-api.version>
         <jakarta.el.version>5.0.0</jakarta.el.version>
-        <jboss.test.audit.version>1.1.4.Final</jboss.test.audit.version>
         <arquillian.container.glassfish6>1.0.0.Alpha1</arquillian.container.glassfish6>
-        <version.arquillian_core>1.7.0.Final-SNAPSHOT</version.arquillian_core>
+        <version.arquillian_core>1.7.0.Alpha10</version.arquillian_core>
     </properties>
 
     <!-- TODO: Temporarily enable snapshot repository -->
@@ -71,7 +70,7 @@
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>beanvalidation-tck-tests</artifactId>
-            <version>3.0.0</version>
+            <version>3.0.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -131,16 +130,6 @@
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>${assertj-core.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.test-audit</groupId>
-            <artifactId>jboss-test-audit-api</artifactId>
-            <version>${jboss.test.audit.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.test-audit</groupId>
-            <artifactId>jboss-test-audit-impl</artifactId>
-            <version>${jboss.test.audit.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.shrinkwrap.descriptors</groupId>
