@@ -133,16 +133,6 @@
             <version>${assertj-core.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.jboss.test-audit</groupId>
-            <artifactId>jboss-test-audit-api</artifactId>
-            <version>${jboss.test.audit.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.test-audit</groupId>
-            <artifactId>jboss-test-audit-impl</artifactId>
-            <version>${jboss.test.audit.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.jboss.shrinkwrap.descriptors</groupId>
             <artifactId>shrinkwrap-descriptors-impl-javaee</artifactId>
             <version>${shrinkwrap.descriptors.version}</version>
@@ -236,25 +226,11 @@
             <version>3.0.3</version>
         </dependency>
         <dependency>
-            <groupId>org.jboss.arquillian.testenricher</groupId>
-            <artifactId>arquillian-testenricher-cdi-jakarta</artifactId>
-            <version>${version.arquillian_core}</version>
+            <groupId>org.omnifaces.arquillian</groupId>
+            <artifactId>arquillian-glassfish-server-managed</artifactId>
+            <version>1.0</version>
         </dependency>
-        <dependency>
-            <groupId>org.jboss.arquillian.testenricher</groupId>
-            <artifactId>arquillian-testenricher-ejb-jakarta</artifactId>
-            <version>${version.arquillian_core}</version>    
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.arquillian.testenricher</groupId>
-            <artifactId>arquillian-testenricher-resource-jakarta</artifactId>
-            <version>${version.arquillian_core}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.arquillian.testenricher</groupId>
-            <artifactId>arquillian-testenricher-initialcontext</artifactId>
-            <version>${version.arquillian_core}</version>
-        </dependency>
+
     </dependencies>
  
     <build>
@@ -345,82 +321,17 @@
  
       <profiles>
         <profile>
-            <id>glassish-remote</id>
-            <dependencies>
-                <dependency>
-                        <groupId>org.jboss.arquillian.container</groupId>
-                        <artifactId>arquillian-glassfish-managed-jakarta</artifactId>
-                        <version>1.0.0.Final-SNAPSHOT</version>
-                        <exclusions>
-                            <exclusion>
-                                <artifactId>arquillian-testenricher-cdi-jakarta</artifactId>
-                                <groupId>org.jboss.arquillian.testenricher</groupId>
-                            </exclusion>
-                            <exclusion>
-                                <artifactId>arquillian-testenricher-ejb-jakarta</artifactId>
-                                <groupId>org.jboss.arquillian.testenricher</groupId>
-                            </exclusion>
-                            <exclusion>
-                                <artifactId>arquillian-testenricher-resource-jakarta</artifactId>
-                                <groupId>org.jboss.arquillian.testenricher</groupId>
-                            </exclusion>
-                            <exclusion>
-                                <artifactId>arquillian-testenricher-initialcontext</artifactId>
-                                <groupId>org.jboss.arquillian.testenricher</groupId>
-                            </exclusion>    
-                        </exclusions>
-                    </dependency> 
-            </dependencies>
-            <build>
-                <plugins>
-                    <!-- Run the tests -->
-                    <plugin>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.19.1</version>
-                        <configuration>
-                            <argLine>-Xmx1024m</argLine>
-                            <forkMode>once</forkMode>
-                            <suiteXmlFiles>
-                                <suiteXmlFile>${tck.suite.file}</suiteXmlFile>
-                            </suiteXmlFiles>
-                            <systemPropertyVariables>
-                                <validation.provider>${validation.provider}</validation.provider>
-                                <arquillian.launch>incontainer</arquillian.launch>
-                            </systemPropertyVariables>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
             <id>glassfish-managed</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <dependencies>
                 <dependency>
-                        <groupId>org.jboss.arquillian.container</groupId>
-                        <artifactId>arquillian-glassfish-managed-jakarta</artifactId>
-                        <version>1.0.0.Final-SNAPSHOT</version>
-                        <exclusions>
-                            <exclusion>
-                                <artifactId>arquillian-testenricher-cdi-jakarta</artifactId>
-                                <groupId>org.jboss.arquillian.testenricher</groupId>
-                            </exclusion>
-                            <exclusion>
-                                <artifactId>arquillian-testenricher-ejb-jakarta</artifactId>
-                                <groupId>org.jboss.arquillian.testenricher</groupId>
-                            </exclusion>
-                            <exclusion>
-                                <artifactId>arquillian-testenricher-resource-jakarta</artifactId>
-                                <groupId>org.jboss.arquillian.testenricher</groupId>
-                            </exclusion>
-                            <exclusion>
-                                <artifactId>arquillian-testenricher-initialcontext</artifactId>
-                                <groupId>org.jboss.arquillian.testenricher</groupId>
-                            </exclusion>    
-                        </exclusions>
-                    </dependency> 
+                    <groupId>org.jboss.arquillian.container</groupId>
+                    <artifactId>arquillian-parent-glassfish</artifactId>
+                    <version>1.0.2</version>
+                    <type>pom</type>
+                </dependency> 
             </dependencies>
             <build>
                 <plugins>
