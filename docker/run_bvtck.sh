@@ -32,8 +32,16 @@ echo "Download and install GlassFish ..."
 wget --progress=bar:force --no-cache $GF_BUNDLE_URL -O ${WORKSPACE}/latest-glassfish.zip
 unzip -o ${WORKSPACE}/latest-glassfish.zip -d ${WORKSPACE}
 
+# Build 1.0.0-SNAPSHOT release of arquillian-container-glassfish7
+rm -fr arquillian-container-glassfish6-master 
+wget https://github.com/arquillian/arquillian-container-glassfish6/archive/master.zip -O arquillian-container-glassfish.zip
+unzip -q -o arquillian-container-glassfish.zip
+cd arquillian-container-glassfish6-master
+mvn --global-settings "${TS_HOME}/settings.xml" clean install -DskipTests
+
+
 if [ -z "${BV_TCK_VERSION}" ]; then
-  BV_TCK_VERSION=3.0.0
+  BV_TCK_VERSION=3.0.1
 fi
 
 if [ -z "${BV_TCK_BUNDLE_URL}" ]; then

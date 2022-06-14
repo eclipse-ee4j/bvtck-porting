@@ -34,15 +34,6 @@
         <enabled>true</enabled>
       </snapshots>
     </repository>
-    <repository>
-      <id>jboss</id>
-      <name>Central Repository</name>
-      <url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
-      <layout>default</layout>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
 </repositories>
 </profile>
 </profiles>
