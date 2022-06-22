@@ -32,8 +32,8 @@ which mvn
 mvn -version
 
 
-sed -i "s#^porting\.home=.*#porting.home=$WORKSPACE#g" "$WORKSPACE/build.xml"
-sed -i "s#^glassfish\.home=.*#glassfish.home=$WORKSPACE/glassfish7/glassfish#g" "$WORKSPACE/build.xml"
+sed -i.bak "s#^porting\.home=.*#porting.home=$WORKSPACE#g" "$WORKSPACE/build.xml"
+sed -i.bak "s#^glassfish\.home=.*#glassfish.home=$WORKSPACE/glassfish7/glassfish#g" "$WORKSPACE/build.xml"
 
 ant -version
 ant dist.sani
