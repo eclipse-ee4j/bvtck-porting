@@ -25,7 +25,6 @@
     <defaultProtocol type="Servlet 5.0"/>
 
     <engine>
-        <property name="maxTestClassesBeforeRestart">@maxClassesRestart@</property>
         <property name="deploymentExportPath">target/artifacts</property>
     </engine>
 

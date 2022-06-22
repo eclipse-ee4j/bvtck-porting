@@ -32,13 +32,6 @@ echo "Download and install GlassFish ..."
 wget --progress=bar:force --no-cache $GF_BUNDLE_URL -O ${WORKSPACE}/latest-glassfish.zip
 unzip -o ${WORKSPACE}/latest-glassfish.zip -d ${WORKSPACE}
 
-# Build 1.0.0-SNAPSHOT release of arquillian-container-glassfish7
-rm -fr arquillian-container-glassfish6-master 
-wget https://github.com/arquillian/arquillian-container-glassfish6/archive/master.zip -O arquillian-container-glassfish.zip
-unzip -q -o arquillian-container-glassfish.zip
-cd arquillian-container-glassfish6-master
-mvn --global-settings "${TS_HOME}/settings.xml" clean install -DskipTests
-
 
 if [ -z "${BV_TCK_VERSION}" ]; then
   BV_TCK_VERSION=3.0.1
@@ -50,7 +43,7 @@ fi
 
 
 #Install BV TCK dist
-#echo "Download and unzip BV TCK dist ..."
+echo "Download and unzip BV TCK dist ..."
 wget --progress=bar:force --no-cache $BV_TCK_BUNDLE_URL -O ${WORKSPACE}/latest-beanvalidation-tck-dist.zip
 unzip -o ${WORKSPACE}/latest-beanvalidation-tck-dist.zip -d ${WORKSPACE}/
 
@@ -74,10 +67,10 @@ mkdir -p ${REPORT}/beanvalidation-$VER
 cat ${WORKSPACE}/docker/BV.policy >> ${WORKSPACE}/${GLASSFISH_TOP_DIR}/glassfish/domains/domain1/config/server.policy
 
 #Edit test properties
-sed -i "s#porting.home=.*#porting.home=${TS_HOME}#g" ${TS_HOME}/build.properties
-sed -i "s#glassfish.home=.*#glassfish.home=${WORKSPACE}/${GLASSFISH_TOP_DIR}/glassfish#g" ${TS_HOME}/build.properties
-sed -i "s#report.dir=.*#report.dir=${REPORT}#g" ${TS_HOME}/build.properties
-sed -i "s#admin.user=.*#admin.user=admin#g" ${TS_HOME}/build.properties
+sed -i.bak "s#porting.home=.*#porting.home=${TS_HOME}#g" ${TS_HOME}/build.properties
+sed -i.bak "s#glassfish.home=.*#glassfish.home=${WORKSPACE}/${GLASSFISH_TOP_DIR}/glassfish#g" ${TS_HOME}/build.properties
+sed -i.bak "s#report.dir=.*#report.dir=${REPORT}#g" ${TS_HOME}/build.properties
+sed -i.bak "s#admin.user=.*#admin.user=admin#g" ${TS_HOME}/build.properties
 
 GROUP_ID=jakarta.validation
 ARTIFACT_ID=beanvalidation-tck-tests 
@@ -131,7 +124,7 @@ fi
 
 #Copy surefire reports to report directory
 mv ${REPORT}/beanvalidation-$VER/TEST-TestSuite.xml  ${REPORT}/beanvalidation-$VER/beanvalidation-$VER-junit-report.xml
-sed -i 's/name=\"TestSuite\"/name="beanvalidation-3.0"/g' ${REPORT}/beanvalidation-$VER/beanvalidation-$VER-junit-report.xml
+sed -i.bak 's/name=\"TestSuite\"/name="beanvalidation-3.0"/g' ${REPORT}/beanvalidation-$VER/beanvalidation-$VER-junit-report.xml
 
 # Create Junit formated file for sigtests
 echo '<?xml version="1.0" encoding="UTF-8" ?>' > $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
@@ -146,11 +139,11 @@ echo '</testsuite>' >> $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-j
 # Fill appropriate test counts
 if [ -f "$REPORT/beanvalidation-$VER-sig/report.html" ]; then
   if grep -q STATUS:Passed "$REPORT/beanvalidation-$VER-sig/report.html"; then
-    sed -i 's/tests=\"TOTAL\"/tests="1"/g' $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
-    sed -i 's/failures=\"FAILED\"/failures="0"/g' $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
+    sed -i.bak 's/tests=\"TOTAL\"/tests="1"/g' $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
+    sed -i.bak 's/failures=\"FAILED\"/failures="0"/g' $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
   else
-    sed -i 's/tests=\"TOTAL\"/tests="1"/g' $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
-    sed -i 's/failures=\"FAILED\"/failures="1"/g' $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
+    sed -i.bak 's/tests=\"TOTAL\"/tests="1"/g' $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
+    sed -i.bak 's/failures=\"FAILED\"/failures="1"/g' $REPORT/beanvalidation-$VER-sig/beanvalidation-$VER-sig-junit-report.xml
   fi
 fi
 
