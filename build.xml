@@ -450,6 +450,8 @@
 			<arg value="--global-settings" />
 			<arg value="${porting.home}/settings.xml"/>
 			<arg value="-U" />
+			<arg value="-Dincontainer" />
+			<arg value="-Dmaven.test.failure.ignore=true" />
             <arg value="clean" />
             <arg value="test" />
 		</exec>
