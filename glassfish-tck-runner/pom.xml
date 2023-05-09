@@ -37,7 +37,7 @@
         <validation.provider>org.hibernate.validator.HibernateValidator</validation.provider>
         <remote.debug/>
         <validation.api.version>3.0.1</validation.api.version>
-        <testng.version>6.14.3</testng.version>
+        <testng.version>7.5.1</testng.version>
         <assertj-core.version>3.7.0</assertj-core.version>
         <shrinkwrap.descriptors.version>2.0.0-alpha-10</shrinkwrap.descriptors.version>
         <cdi-api.version>4.0.1</cdi-api.version>
